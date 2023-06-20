@@ -49,7 +49,7 @@ Acedendo às rotas pedidas no enunciado, deverá ser obtido o resultado correto.
 
 Observações:
 
-A ligação à base de dados foi feita dentro da API conforme o mostrado na figura em anexo. A obtenção do IP correto foi feita a partir do seguinte comando:
+A string de ligação à base de dados utiliza um IP específico que deve ser alterado conforme a necessidade de cada um aceder ao serviço mongo. A obtenção do IP correto do container mongo foi feita a partir do seguinte comando:
 
 sudo docker inspect ff43bd8c8a8d | grep "IPAddress"
 
