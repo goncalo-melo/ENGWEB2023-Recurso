@@ -40,6 +40,8 @@ sudo docker exec -it mongo mongoimport -d estetica -c consultas --file dataset.j
 Verificação da importação e realização das queries:
 sudo docker exec -it mongo mongosh
 
+De forma a lidar com as dependências, deve ser corrido o comando 'npm i --save' dentro das pastas "API" e "Interface". As pastas "node_modules" não vão, naturalmente, ser incluídas na entrega.
+
 Para iniciar as aplicações deverá correr o comando 'npm start' dentro das pastas "API" e "Interface", respetivamente.
 
 Acedendo às rotas pedidas no enunciado, deverá ser obtido o resultado correto.
