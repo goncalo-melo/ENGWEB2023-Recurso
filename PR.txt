@@ -1,1 +1,55 @@
+Todos os acessos aos dados são feitos a partir da comunicação com a API de dados presente numa pasta chamada "API" dentro da pasta "ex1".
+A interface encontra-se na pasta "ex2", dentro de outra pasta com o nome "Interface".
+
+Exercício 1.2 Queries
+1. db.consultas.find().count()
+2. db.consultas.find({idade: {$gt: 80}}).count()
+3. db.consultas.aggregate([{$group: {_id:"$sexo", count: {$sum:1}}}])
+4. db.consultas.aggregate([{$unwind: "$operacoes"}, {$group:{_id:"$operacoes.nome", count: {$sum:1}}}])
+5. db.consultas.aggregate([
+  {
+    $consulta: {
+      ano: {
+        $ano: {
+          $dateFromString: {
+            dateString: "$data",
+            format: "%Y/%m/%d"
+          }
+        }
+      }
+    }
+  },
+  {
+    $group: {
+      _id: "$ano",
+      count: { $sum: 1 }
+    }
+  }
+])
+
+Instruções e comandos:
+
+Comando utilizado para colocar o ficheiro json no sistema de ficheiros do container mongo, após feitas as respetivas alterações. As alterações foram feitas da seguinte forma:
+Com o CTRL+F e replace alterei o NIF para _id e depois a partir de uma script em python adicionei um _id a cada operação.
+
+sudo docker cp ~/Downloads/dataset.json mongo:.
+
+Importação da base de dados:
+sudo docker exec -it mongo mongoimport -d estetica -c consultas --file dataset.json --jsonArray
+
+Verificação da importação e realização das queries:
+sudo docker exec -it mongo mongosh
+
+Para iniciar as aplicações deverá correr o comando 'npm start' dentro das pastas "API" e "Interface", respetivamente.
+
+Acedendo às rotas pedidas no enunciado, deverá ser obtido o resultado correto.
+
+
+Observações:
+
+A ligação à base de dados foi feita dentro da API conforme o mostrado na figura em anexo. A obtenção do IP correto foi feita a partir do seguinte comando:
+
+sudo docker inspect ff43bd8c8a8d | grep "IPAddress"
+
+em que ff43bd8c8a8d é o id do container mongo em questão.
 
